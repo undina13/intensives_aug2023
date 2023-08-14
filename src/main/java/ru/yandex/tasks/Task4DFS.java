@@ -1,16 +1,30 @@
 package ru.yandex.tasks;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Stack;
 
 public class Task4DFS {
-    public void runSearch() {
-        /*
-         * Реализация dfs
-         */
+    public static void runSearch(int[][] tree, int currIndex, List<Integer> result) {
+        if (tree[currIndex][0] >= 0) {
+            runSearch(tree, tree[currIndex][0], result);
+        }
+        if (tree[currIndex][1] >= 0) {
+            runSearch(tree, tree[currIndex][1], result);
+        }
+        result.add(currIndex);
+
         // (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ WRITE CODE HERE (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧
     }
 
     public static int[] getDFSOrder(int[][] tree, int root) {
+        List<Integer> result = new ArrayList<>();
+        runSearch(tree, root, result);
+        return result.stream().mapToInt(Integer::intValue)
+                .peek(value -> System.out.print(value + " ")).toArray();
+
+
         /*
          * Функция возвращает массив с порядковыми номерами вершин в обходе
          * Сначала левое поддерево, затем правое, затем корень.
@@ -19,7 +33,7 @@ public class Task4DFS {
          * root - корень, откуда нужно начинать обход
          */
         // (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ WRITE CODE HERE (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧
-        return null;
+
     }
 
     public static void selfCheck() {
@@ -45,5 +59,31 @@ public class Task4DFS {
         assert (Arrays.equals(getDFSOrder(tree, 3), ans2));
         assert (Arrays.equals(getDFSOrder(tree, 2), ans3));
         assert (Arrays.equals(getDFSOrder(tree, 6), ans4));
+    }
+    public static void main(String[] args) {
+        selfCheck();
+        int[][] tree =
+                {
+                        {1, 6},
+                        {2, 3},
+                        {-1, -1},
+                        {4, -1},
+                        {-1, -1},
+                        {-1, -1},
+                        {-1, 8},
+                        {-1, -1},
+                        {-1, -1}
+                };
+
+        getDFSOrder(tree, 0);
+        System.out.println();
+        getDFSOrder(tree, 3);
+        System.out.println();
+        getDFSOrder(tree, 2);
+        System.out.println();
+        getDFSOrder(tree, 6);
+        System.out.println();
+
+
     }
 }
