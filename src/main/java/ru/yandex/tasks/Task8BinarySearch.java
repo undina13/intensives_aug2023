@@ -19,4 +19,8 @@ public class Task8BinarySearch {
             assert (find(input[i], input) == i);
         }
     }
+
+    public static void main(String[] args) {
+
+    }
 }

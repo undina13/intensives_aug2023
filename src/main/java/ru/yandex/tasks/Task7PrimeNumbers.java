@@ -10,12 +10,17 @@ public class Task7PrimeNumbers {
         }
         int sq = (int) Math.sqrt(N) + 1;
         for (int i = 2; i < sq; i++) {
-            for (int j = i + 1; j <= N; j++) {
-                if(j%i ==0){
-                    res.remove(j);
-                }
+            for (int j = i+1; j <N/i ; j++) {
+                res.remove(i*j);
             }
         }
+//        for (int i = 2; i < sq; i++) {
+//            for (int j = i + 1; j <= N; j++) {
+//                if(j%i ==0){
+//                    res.remove(j);
+//                }
+//            }
+      //  }
 
         /*
          * 2 <= N <= 10^6
