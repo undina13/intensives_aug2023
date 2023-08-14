@@ -1,12 +1,28 @@
 package ru.yandex.tasks;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Task5BFS {
-    public void runSearch() {
-        /*
-         * Реализация bfs
-         */
+
+        public static int[] runSearch(int[][] tree, int root) {
+
+            ArrayDeque<Integer> queue = new ArrayDeque<>();
+            queue.addLast(root);
+            List<Integer> result = new ArrayList<>();
+            while(!queue.isEmpty()) {
+                int currV = queue.removeFirst();
+                if (tree[currV][0] != -1) {
+                    queue.addLast(tree[currV][0]);
+                }
+                if (tree[currV][1] != -1) {
+                    queue.addLast(tree[currV][1]);
+                }
+                result.add(currV);
+            }
+            return result.stream().mapToInt(Integer::intValue).peek(value -> System.out.print(value + " ")).toArray();
         // (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ WRITE CODE HERE (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧
     }
 
@@ -18,7 +34,7 @@ public class Task5BFS {
          * root - корень, откуда нужно начинать обход
          */
         // (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ WRITE CODE HERE (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧
-        return null;
+        return runSearch(tree, root);
     }
 
     public static void selfCheck() {
@@ -44,5 +60,32 @@ public class Task5BFS {
         assert (Arrays.equals(getBFSOrder(tree, 3), ans2));
         assert (Arrays.equals(getBFSOrder(tree, 2), ans3));
         assert (Arrays.equals(getBFSOrder(tree, 6), ans4));
+    }
+
+    public static void main(String[] args) {
+        selfCheck();
+        int[][] tree =
+                {
+                        {1, 6},
+                        {2, 3},
+                        {-1, -1},
+                        {4, -1},
+                        {-1, -1},
+                        {-1, -1},
+                        {-1, 8},
+                        {-1, -1},
+                        {-1, -1}
+                };
+
+        getBFSOrder(tree, 0);
+        System.out.println();
+        getBFSOrder(tree, 3);
+        System.out.println();
+        getBFSOrder(tree, 2);
+        System.out.println();
+        getBFSOrder(tree, 6);
+        System.out.println();
+
+
     }
 }
